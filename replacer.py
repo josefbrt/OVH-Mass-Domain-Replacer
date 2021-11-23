@@ -1,8 +1,8 @@
 import json
 import ovh
 
-oldIP = XXX.XXX.XXX.XXX
-newIP = XXX.XXX.XXX.XXX
+oldIP = "XXX.XXX.XXX.XXX"  # Replace with your old IP
+newIP = "XXX.XXX.XXX.XXX"  # Replace with your new IP
 
 client = ovh.Client(
     endpoint='ovh-eu',
@@ -17,7 +17,10 @@ domainIP = {}
 
 for x in domainNames:
     link = '/domain/zone/' + x + '/record'
-    domainRecords[x] = client.get(link)
+    try:
+       domainRecords[x] = client.get(link)
+    except:
+       print("Domain expired!")
 
 for x in domainRecords:
     saveID = []
